@@ -1,0 +1,104 @@
+
+services:
+  mysql-1:
+    build: ./mysql-cluster/mysql-1
+    container_name: mysql-1
+    hostname: mysql-1
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpassword
+      MYSQL_DATABASE: userdb
+    ports:
+      - "3307:3306"
+    volumes:
+      - ./data/mysql:/var/lib/mysql
+      # - ./mysql-cluster/mysql-1/my.cnf:/etc/mysql/conf.d/my.cnf:ro
+    networks:
+      default:
+        aliases:
+          - mysql
+
+  mysql-2:
+    build: ./mysql-cluster/mysql-2
+    container_name: mysql-2
+    hostname: mysql-2
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpassword
+    ports:
+      - "3318:3306"
+    volumes:
+      # Windows bind mount so lower_case_table_names=2 matches mysql-1
+      # (old named volume mysql2-data is kept, just no longer mounted)
+      - ./data/mysql2:/var/lib/mysql
+      # - ./mysql-cluster/mysql-2/my.cnf:/etc/mysql/conf.d/my.cnf:ro
+
+  mysql-3:
+    build: ./mysql-cluster/mysql-3
+    container_name: mysql-3
+    hostname: mysql-3
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpassword
+    ports:
+      - "3319:3306"
+    volumes:
+      # Windows bind mount so lower_case_table_names=2 matches mysql-1
+      # (old named volume mysql3-data is kept, just no longer mounted)
+      - ./data/mysql3:/var/lib/mysql
+      # - ./mysql-cluster/mysql-3/my.cnf:/etc/mysql/conf.d/my.cnf:ro
+
+  # MySQL Router: bootstraps from the InnoDB Cluster metadata and always
+  # sends 6446 (read/write) to the current PRIMARY, 6447 (read-only) to SECONDARIES
+  mysql-router:
+    image: container-registry.oracle.com/mysql/community-router:8.0
+    container_name: mysql-router
+    hostname: mysql-router
+    restart: unless-stopped
+    environment:
+      MYSQL_HOST: mysql-1
+      MYSQL_PORT: 3306
+      MYSQL_USER: root
+      MYSQL_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_INNODB_CLUSTER_MEMBERS: 3
+    ports:
+      - "6446:6446"
+      - "6447:6447"
+    depends_on:
+      - mysql-1
+      - mysql-2
+      - mysql-3
+
+  backend:
+    build: ./Backend
+    container_name: devops-backend
+    restart: unless-stopped
+    ports:
+      - "3000:3000"
+    environment:
+      DB_HOST: mysql-router
+      DB_PORT: 6446
+      DB_USER: ${APP_DB_USER}
+      DB_PASSWORD: ${APP_DB_PASSWORD}
+      DB_NAME: userdb
+    depends_on:
+      - mysql-router
+
+  frontend:
+    image: nginx:alpine
+    container_name: devops-frontend
+    restart: unless-stopped
+    ports:
+      - "8080:80"
+    volumes:
+      - ./devops-website:/usr/share/nginx/html:ro
+    depends_on:
+      - backend
+
+volumes:
+  mysql2-data:
+    external: true
+    name: mysql-cluster_mysql2-data
+  mysql3-data:
+    external: true
+    name: mysql-cluster_mysql3-data

@@ -1,0 +1,21 @@
+# MySQL database files and backups
+data/
+*.sock
+*.pid
+
+# Environment files and secrets
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+
+# Node.js dependencies
+node_modules/
+
+# Logs
+*.log
+
+# OS files
+.DS_Store
+Thumbs.db

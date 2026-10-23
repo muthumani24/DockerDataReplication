@@ -1,0 +1,2250 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>DevOps Portal</title>
+
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+
+        body {
+            background: #0f172a;
+            color: white;
+            min-height: 100vh;
+        }
+
+
+        /* ================================================= */
+        /* LOGIN / REGISTER */
+        /* ================================================= */
+
+        #loginPage,
+        #registerPage {
+
+            min-height: 100vh;
+
+            display: flex;
+
+            justify-content: center;
+
+            align-items: center;
+
+            background: linear-gradient(
+                135deg,
+                #172554,
+                #0f172a
+            );
+
+        }
+
+
+        #registerPage {
+            display: none;
+        }
+
+
+        .login-container {
+
+            width: 850px;
+
+            min-height: 570px;
+
+            display: flex;
+
+            border-radius: 22px;
+
+            overflow: hidden;
+
+            border: 1px solid #334155;
+
+            background: #172033;
+
+            box-shadow:
+                0 30px 80px rgba(0, 0, 0, 0.5);
+
+        }
+
+
+        .login-left {
+
+            width: 50%;
+
+            padding: 55px 45px;
+
+            background: linear-gradient(
+                145deg,
+                #294674,
+                #1e293b
+            );
+
+        }
+
+
+        .login-left .rocket {
+
+            font-size: 45px;
+
+            margin-bottom: 20px;
+
+        }
+
+
+        .login-left h1 {
+
+            font-size: 40px;
+
+            margin-bottom: 20px;
+
+        }
+
+
+        .login-left p {
+
+            color: #cbd5e1;
+
+            line-height: 1.7;
+
+            font-size: 16px;
+
+        }
+
+
+        .features {
+
+            margin-top: 40px;
+
+        }
+
+
+        .feature {
+
+            margin: 20px 0;
+
+            color: #dbeafe;
+
+            font-size: 16px;
+
+        }
+
+
+        .login-right {
+
+            width: 50%;
+
+            padding: 60px 45px;
+
+        }
+
+
+        .login-right h2 {
+
+            font-size: 30px;
+
+            margin-bottom: 10px;
+
+        }
+
+
+        .subtitle {
+
+            color: #94a3b8;
+
+            margin-bottom: 35px;
+
+        }
+
+
+        label {
+
+            display: block;
+
+            margin-bottom: 8px;
+
+            color: #cbd5e1;
+
+            font-size: 14px;
+
+        }
+
+
+        input {
+
+            width: 100%;
+
+            padding: 15px;
+
+            border-radius: 10px;
+
+            border: 1px solid #475569;
+
+            background: #e5edf9;
+
+            color: #111827;
+
+            font-size: 15px;
+
+            margin-bottom: 20px;
+
+            outline: none;
+
+        }
+
+
+        input:focus {
+
+            border-color: #6366f1;
+
+        }
+
+
+        .login-btn {
+
+            width: 100%;
+
+            padding: 15px;
+
+            border: none;
+
+            border-radius: 10px;
+
+            background: linear-gradient(
+                90deg,
+                #2563eb,
+                #7c3aed
+            );
+
+            color: white;
+
+            font-size: 16px;
+
+            font-weight: bold;
+
+            cursor: pointer;
+
+            transition: 0.3s;
+
+        }
+
+
+        .login-btn:hover {
+
+            transform: translateY(-2px);
+
+            box-shadow:
+                0 8px 25px rgba(
+                    99,
+                    102,
+                    241,
+                    0.4
+                );
+
+        }
+
+
+        .register-text {
+
+            text-align: center;
+
+            margin-top: 25px;
+
+            color: #94a3b8;
+
+        }
+
+
+        .register-text span {
+
+            color: #60a5fa;
+
+            cursor: pointer;
+
+        }
+
+
+        #loginMessage,
+        #registerMessage {
+
+            margin-top: 15px;
+
+            text-align: center;
+
+        }
+
+
+        #loginMessage {
+
+            color: #f87171;
+
+        }
+
+
+        /* ================================================= */
+        /* DASHBOARD */
+        /* ================================================= */
+
+        #dashboardPage {
+
+            display: none;
+
+            min-height: 100vh;
+
+            background: #0f172a;
+
+        }
+
+
+        .navbar {
+
+            height: 70px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            padding: 0 40px;
+
+            background: #111827;
+
+            border-bottom: 1px solid #334155;
+
+        }
+
+
+        .logo {
+
+            font-size: 22px;
+
+            font-weight: bold;
+
+        }
+
+
+        .logo span {
+
+            color: #60a5fa;
+
+        }
+
+
+        .user-area {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 20px;
+
+        }
+
+
+        .welcome-user {
+
+            color: #cbd5e1;
+
+        }
+
+
+        .logout-btn {
+
+            padding: 9px 18px;
+
+            border: 1px solid #475569;
+
+            border-radius: 8px;
+
+            background: transparent;
+
+            color: white;
+
+            cursor: pointer;
+
+        }
+
+
+        .logout-btn:hover {
+
+            background: #334155;
+
+        }
+
+
+        .dashboard {
+
+            padding: 50px 60px;
+
+            max-width: 1400px;
+
+            margin: auto;
+
+        }
+
+
+        .welcome-section {
+
+            margin-bottom: 45px;
+
+        }
+
+
+        .welcome-section h1 {
+
+            font-size: 38px;
+
+            margin-bottom: 12px;
+
+        }
+
+
+        .welcome-section h1 span {
+
+            color: #60a5fa;
+
+        }
+
+
+        .welcome-section p {
+
+            color: #94a3b8;
+
+            font-size: 17px;
+
+        }
+
+
+        .section-title {
+
+            font-size: 25px;
+
+            margin-bottom: 20px;
+
+        }
+
+
+        .technology-grid {
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(
+                    auto-fit,
+                    minmax(220px, 1fr)
+                );
+
+            gap: 20px;
+
+            margin-bottom: 50px;
+
+        }
+
+
+        .tech-card {
+
+            background: #1e293b;
+
+            border: 1px solid #334155;
+
+            border-radius: 15px;
+
+            padding: 25px;
+
+            cursor: pointer;
+
+            transition: 0.3s;
+
+        }
+
+
+        .tech-card:hover {
+
+            transform: translateY(-6px);
+
+            border-color: #6366f1;
+
+            box-shadow:
+                0 15px 35px rgba(
+                    0,
+                    0,
+                    0,
+                    0.3
+                );
+
+        }
+
+
+        .tech-icon {
+
+            font-size: 38px;
+
+            margin-bottom: 15px;
+
+        }
+
+
+        .tech-card h3 {
+
+            margin-bottom: 10px;
+
+            font-size: 20px;
+
+        }
+
+
+        .tech-card p {
+
+            color: #94a3b8;
+
+            font-size: 14px;
+
+            line-height: 1.6;
+
+        }
+
+
+        /* ================================================= */
+        /* DETAILS PAGE */
+        /* ================================================= */
+
+        #detailsPage {
+
+            display: none;
+
+            min-height: 100vh;
+
+        }
+
+
+        .details-container {
+
+            max-width: 1000px;
+
+            margin: auto;
+
+            padding: 50px;
+
+        }
+
+
+        .back-btn {
+
+            padding: 10px 20px;
+
+            background: #334155;
+
+            border: none;
+
+            border-radius: 8px;
+
+            color: white;
+
+            cursor: pointer;
+
+            margin-bottom: 30px;
+
+        }
+
+
+        .details-card {
+
+            background: #1e293b;
+
+            border: 1px solid #334155;
+
+            border-radius: 18px;
+
+            padding: 40px;
+
+        }
+
+
+        .details-icon {
+
+            font-size: 55px;
+
+            margin-bottom: 15px;
+
+        }
+
+
+        .details-card h1 {
+
+            font-size: 38px;
+
+            margin-bottom: 15px;
+
+        }
+
+
+        .details-card .description {
+
+            color: #cbd5e1;
+
+            line-height: 1.8;
+
+            font-size: 17px;
+
+            margin-bottom: 30px;
+
+        }
+
+
+        .info-box {
+
+            background: #111827;
+
+            padding: 20px;
+
+            border-radius: 12px;
+
+            margin-top: 20px;
+
+            border-left: 4px solid #6366f1;
+
+        }
+
+
+        .info-box h3 {
+
+            margin-bottom: 10px;
+
+        }
+
+
+        .info-box p {
+
+            color: #94a3b8;
+
+            line-height: 1.7;
+
+        }
+
+
+        /* ================================================= */
+        /* MOBILE */
+        /* ================================================= */
+
+        @media (max-width: 800px) {
+
+            .login-container {
+
+                width: 95%;
+
+                flex-direction: column;
+
+            }
+
+
+            .login-left,
+            .login-right {
+
+                width: 100%;
+
+            }
+
+
+            .navbar {
+
+                padding: 0 20px;
+
+            }
+
+
+            .dashboard {
+
+                padding: 30px 20px;
+
+            }
+
+
+            .details-container {
+
+                padding: 30px 20px;
+
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<!-- ================================================= -->
+<!-- LOGIN PAGE -->
+<!-- ================================================= -->
+
+<div id="loginPage">
+
+    <div class="login-container">
+
+
+        <div class="login-left">
+
+            <div class="rocket">
+                🚀
+            </div>
+
+
+            <h1>
+                DevOps Portal
+            </h1>
+
+
+            <p>
+
+                Welcome to your containerized application.
+
+                Learn DevOps, Cloud and modern infrastructure
+                technologies from one place.
+
+            </p>
+
+
+            <div class="features">
+
+
+                <div class="feature">
+
+                    🐳 Dockerized Application
+
+                </div>
+
+
+                <div class="feature">
+
+                    🔐 User Authentication
+
+                </div>
+
+
+                <div class="feature">
+
+                    ☁️ Cloud Technologies
+
+                </div>
+
+
+                <div class="feature">
+
+                    ⚙️ DevOps Technologies
+
+                </div>
+
+
+            </div>
+
+        </div>
+
+
+        <div class="login-right">
+
+
+            <h2>
+                Welcome Back 👋
+            </h2>
+
+
+            <p class="subtitle">
+
+                Login to access your account
+
+            </p>
+
+
+            <form id="loginForm">
+
+
+                <label>
+                    Username
+                </label>
+
+
+                <input
+                    type="text"
+                    id="username"
+                    placeholder="Enter username"
+                    required
+                >
+
+
+                <label>
+                    Password
+                </label>
+
+
+                <input
+                    type="password"
+                    id="password"
+                    placeholder="Enter password"
+                    required
+                >
+
+
+                <button
+                    type="submit"
+                    class="login-btn"
+                >
+
+                    Login
+
+                </button>
+
+
+            </form>
+
+
+            <div id="loginMessage"></div>
+
+
+            <div class="register-text">
+
+                Don't have an account?
+
+                <span onclick="showRegister()">
+
+                    Register
+
+                </span>
+
+            </div>
+
+
+        </div>
+
+
+    </div>
+
+</div>
+
+
+
+<!-- ================================================= -->
+<!-- REGISTER PAGE -->
+<!-- ================================================= -->
+
+<div id="registerPage">
+
+    <div class="login-container">
+
+
+        <div class="login-left">
+
+            <div class="rocket">
+                🚀
+            </div>
+
+
+            <h1>
+                Join DevOps Portal
+            </h1>
+
+
+            <p>
+
+                Create your account and start exploring
+                DevOps and Cloud technologies.
+
+            </p>
+
+
+            <div class="features">
+
+
+                <div class="feature">
+
+                    🐳 Docker
+
+                </div>
+
+
+                <div class="feature">
+
+                    🔐 User Authentication
+
+                </div>
+
+
+                <div class="feature">
+
+                    ☁️ Cloud Technologies
+
+                </div>
+
+
+                <div class="feature">
+
+                    ⚙️ DevOps Technologies
+
+                </div>
+
+
+            </div>
+
+        </div>
+
+
+        <div class="login-right">
+
+
+            <h2>
+                Create Account 🚀
+            </h2>
+
+
+            <p class="subtitle">
+
+                Register to access the DevOps Portal
+
+            </p>
+
+
+            <form id="registerForm">
+
+
+                <label>
+                    Username
+                </label>
+
+
+                <input
+                    type="text"
+                    id="registerUsername"
+                    placeholder="Enter username"
+                    required
+                >
+
+
+                <label>
+                    Password
+                </label>
+
+
+                <input
+                    type="password"
+                    id="registerPassword"
+                    placeholder="Enter password"
+                    required
+                >
+
+
+                <button
+                    type="submit"
+                    class="login-btn"
+                >
+
+                    Create Account
+
+                </button>
+
+
+            </form>
+
+
+            <div id="registerMessage"></div>
+
+
+            <div class="register-text">
+
+                Already have an account?
+
+                <span onclick="showLogin()">
+
+                    Login
+
+                </span>
+
+            </div>
+
+
+        </div>
+
+
+    </div>
+
+</div>
+
+
+
+<!-- ================================================= -->
+<!-- DASHBOARD -->
+<!-- ================================================= -->
+
+<div id="dashboardPage">
+
+
+    <nav class="navbar">
+
+
+        <div class="logo">
+
+            🚀 DevOps
+            <span>
+                Portal
+            </span>
+
+        </div>
+
+
+        <div class="user-area">
+
+
+            <div class="welcome-user">
+
+                👤
+                <span id="navbarUsername"></span>
+
+            </div>
+
+
+            <button
+                class="logout-btn"
+                onclick="logout()"
+            >
+
+                Logout
+
+            </button>
+
+
+        </div>
+
+
+    </nav>
+
+
+
+    <main class="dashboard">
+
+
+        <section class="welcome-section">
+
+
+            <h1>
+
+                Welcome,
+                <span id="welcomeUsername"></span>
+                👋
+
+            </h1>
+
+
+            <p>
+
+                Explore DevOps, Cloud and modern
+                infrastructure technologies.
+
+            </p>
+
+
+        </section>
+
+
+
+        <!-- ================= DEVOPS ================= -->
+
+
+        <h2 class="section-title">
+
+            ⚙️ DevOps Technologies
+
+        </h2>
+
+
+        <div class="technology-grid">
+
+
+            <div
+                class="tech-card"
+                onclick="showTechnology('docker')"
+            >
+
+                <div class="tech-icon">
+                    🐳
+                </div>
+
+
+                <h3>
+                    Docker
+                </h3>
+
+
+                <p>
+
+                    Containerize applications and run them
+                    consistently across environments.
+
+                </p>
+
+            </div>
+
+
+
+            <div
+                class="tech-card"
+                onclick="showTechnology('jenkins')"
+            >
+
+                <div class="tech-icon">
+                    🔨
+                </div>
+
+
+                <h3>
+                    Jenkins
+                </h3>
+
+
+                <p>
+
+                    Automate software builds, testing and
+                    continuous integration.
+
+                </p>
+
+            </div>
+
+
+
+            <div
+                class="tech-card"
+                onclick="showTechnology('git')"
+            >
+
+                <div class="tech-icon">
+                    🔀
+                </div>
+
+
+                <h3>
+                    Git
+                </h3>
+
+
+                <p>
+
+                    Track code changes and collaborate
+                    with development teams.
+
+                </p>
+
+            </div>
+
+
+
+            <div
+                class="tech-card"
+                onclick="showTechnology('cicd')"
+            >
+
+                <div class="tech-icon">
+                    🔄
+                </div>
+
+
+                <h3>
+                    CI/CD
+                </h3>
+
+
+                <p>
+
+                    Automate application build, test and
+                    deployment pipelines.
+
+                </p>
+
+            </div>
+
+
+
+            <div
+                class="tech-card"
+                onclick="showTechnology('kubernetes')"
+            >
+
+                <div class="tech-icon">
+                    ☸️
+                </div>
+
+
+                <h3>
+                    Kubernetes
+                </h3>
+
+
+                <p>
+
+                    Manage and orchestrate containers
+                    at scale.
+
+                </p>
+
+            </div>
+
+
+        </div>
+
+
+
+        <!-- ================= CLOUD ================= -->
+
+
+        <h2 class="section-title">
+
+            ☁️ Cloud Technologies
+
+        </h2>
+
+
+        <div class="technology-grid">
+
+
+            <div
+                class="tech-card"
+                onclick="showTechnology('azure')"
+            >
+
+                <div class="tech-icon">
+                    ☁️
+                </div>
+
+
+                <h3>
+                    Microsoft Azure
+                </h3>
+
+
+                <p>
+
+                    Microsoft's cloud platform for compute,
+                    storage, networking and DevOps.
+
+                </p>
+
+            </div>
+
+
+
+            <div
+                class="tech-card"
+                onclick="showTechnology('aws')"
+            >
+
+                <div class="tech-icon">
+                    🌩️
+                </div>
+
+
+                <h3>
+                    AWS
+                </h3>
+
+
+                <p>
+
+                    Amazon's cloud platform providing
+                    scalable infrastructure services.
+
+                </p>
+
+            </div>
+
+
+
+            <div
+                class="tech-card"
+                onclick="showTechnology('linux')"
+            >
+
+                <div class="tech-icon">
+                    🐧
+                </div>
+
+
+                <h3>
+                    Linux
+                </h3>
+
+
+                <p>
+
+                    Operating system widely used for servers,
+                    cloud and DevOps environments.
+
+                </p>
+
+            </div>
+
+
+
+            <div
+                class="tech-card"
+                onclick="showTechnology('terraform')"
+            >
+
+                <div class="tech-icon">
+                    🏗️
+                </div>
+
+
+                <h3>
+                    Terraform
+                </h3>
+
+
+                <p>
+
+                    Infrastructure as Code tool used to
+                    provision cloud infrastructure.
+
+                </p>
+
+            </div>
+
+
+
+            <div
+                class="tech-card"
+                onclick="showTechnology('ansible')"
+            >
+
+                <div class="tech-icon">
+                    ⚡
+                </div>
+
+
+                <h3>
+                    Ansible
+                </h3>
+
+
+                <p>
+
+                    Automate server configuration
+                    and deployment.
+
+                </p>
+
+            </div>
+
+
+        </div>
+
+
+    </main>
+
+</div>
+
+
+
+<!-- ================================================= -->
+<!-- TECHNOLOGY DETAILS -->
+<!-- ================================================= -->
+
+<div id="detailsPage">
+
+
+    <nav class="navbar">
+
+
+        <div class="logo">
+
+            🚀 DevOps
+            <span>
+                Portal
+            </span>
+
+        </div>
+
+
+        <div class="user-area">
+
+
+            <span id="detailsUsername"></span>
+
+
+            <button
+                class="logout-btn"
+                onclick="logout()"
+            >
+
+                Logout
+
+            </button>
+
+
+        </div>
+
+
+    </nav>
+
+
+
+    <div class="details-container">
+
+
+        <button
+            class="back-btn"
+            onclick="backToDashboard()"
+        >
+
+            ← Back to Dashboard
+
+        </button>
+
+
+
+        <div class="details-card">
+
+
+            <div
+                id="detailsIcon"
+                class="details-icon"
+            ></div>
+
+
+            <h1 id="detailsTitle"></h1>
+
+
+            <p
+                id="detailsDescription"
+                class="description"
+            ></p>
+
+
+
+            <div class="info-box">
+
+
+                <h3>
+                    📚 What is it?
+                </h3>
+
+
+                <p id="detailsWhat"></p>
+
+
+            </div>
+
+
+
+            <div class="info-box">
+
+
+                <h3>
+                    💡 Why is it used?
+                </h3>
+
+
+                <p id="detailsWhy"></p>
+
+
+            </div>
+
+
+
+            <div class="info-box">
+
+
+                <h3>
+                    🛠️ DevOps Usage
+                </h3>
+
+
+                <p id="detailsUsage"></p>
+
+
+            </div>
+
+
+        </div>
+
+
+    </div>
+
+</div>
+
+
+
+<script>
+
+
+    // =================================================
+    // BACKEND URL
+    // =================================================
+
+    const API_URL = "http://localhost:3000";
+
+
+
+    // =================================================
+    // LOGIN
+    // =================================================
+
+    document
+        .getElementById("loginForm")
+        .addEventListener(
+            "submit",
+            async function(event) {
+
+                event.preventDefault();
+
+
+                const username =
+                    document
+                        .getElementById("username")
+                        .value
+                        .trim();
+
+
+                const password =
+                    document
+                        .getElementById("password")
+                        .value;
+
+
+                const message =
+                    document
+                        .getElementById("loginMessage");
+
+
+                message.textContent =
+                    "Logging in...";
+
+
+                try {
+
+
+                    const response =
+                        await fetch(
+                             `${API_URL}/api/login`,
+                            {
+
+                                method: "POST",
+
+                                headers: {
+                                    "Content-Type":
+                                        "application/json"
+                                },
+
+                                body:
+                                    JSON.stringify({
+                                        username:
+                                            username,
+
+                                        password:
+                                            password
+                                    })
+
+                            }
+                        );
+
+
+                    const data =
+                        await response.json();
+
+
+                    if (!response.ok) {
+
+                        message.textContent =
+                            data.message ||
+                            "Invalid username or password";
+
+                        return;
+
+                    }
+
+
+                    localStorage.setItem(
+                        "username",
+                        data.username ||
+                        username
+                    );
+
+
+                    showDashboard(
+                        data.username ||
+                        username
+                    );
+
+
+                }
+
+                catch (error) {
+
+                    console.error(error);
+
+
+                    message.textContent =
+                        "Unable to connect to backend.";
+
+                }
+
+            }
+        );
+
+
+
+    // =================================================
+    // REGISTER
+    // =================================================
+
+    document
+        .getElementById("registerForm")
+        .addEventListener(
+            "submit",
+            async function(event) {
+
+                event.preventDefault();
+
+
+                const username =
+                    document
+                        .getElementById(
+                            "registerUsername"
+                        )
+                        .value
+                        .trim();
+
+
+                const password =
+                    document
+                        .getElementById(
+                            "registerPassword"
+                        )
+                        .value;
+
+
+                const message =
+                    document
+                        .getElementById(
+                            "registerMessage"
+                        );
+
+
+                message.style.color =
+                    "#94a3b8";
+
+
+                message.textContent =
+                    "Creating account...";
+
+
+                try {
+
+
+                    const response =
+                        await fetch(
+                            `${API_URL}/api/register`,
+                            {
+
+                                method: "POST",
+
+                                headers: {
+                                    "Content-Type":
+                                        "application/json"
+                                },
+
+                                body:
+                                    JSON.stringify({
+
+                                        username:
+                                            username,
+
+                                        password:
+                                            password
+
+                                    })
+
+                            }
+                        );
+
+
+                    const data =
+                        await response.json();
+
+
+                    if (!response.ok) {
+
+                        message.style.color =
+                            "#f87171";
+
+
+                        message.textContent =
+                            data.message ||
+                            "Registration failed.";
+
+
+                        return;
+
+                    }
+
+
+                    message.style.color =
+                        "#4ade80";
+
+
+                    message.textContent =
+                        "Account created successfully!";
+
+
+                    document
+                        .getElementById(
+                            "registerUsername"
+                        )
+                        .value = "";
+
+
+                    document
+                        .getElementById(
+                            "registerPassword"
+                        )
+                        .value = "";
+
+
+                    setTimeout(
+                        function() {
+
+                            showLogin();
+
+                        },
+                        1500
+                    );
+
+
+                }
+
+                catch (error) {
+
+                    console.error(error);
+
+
+                    message.style.color =
+                        "#f87171";
+
+
+                    message.textContent =
+                        "Unable to connect to backend.";
+
+                }
+
+            }
+        );
+
+
+
+    // =================================================
+    // SHOW REGISTER
+    // =================================================
+
+    function showRegister() {
+
+
+        document
+            .getElementById("loginPage")
+            .style.display = "none";
+
+
+        document
+            .getElementById("dashboardPage")
+            .style.display = "none";
+
+
+        document
+            .getElementById("detailsPage")
+            .style.display = "none";
+
+
+        document
+            .getElementById("registerPage")
+            .style.display = "flex";
+
+
+    }
+
+
+
+    // =================================================
+    // SHOW LOGIN
+    // =================================================
+
+    function showLogin() {
+
+
+        document
+            .getElementById("registerPage")
+            .style.display = "none";
+
+
+        document
+            .getElementById("dashboardPage")
+            .style.display = "none";
+
+
+        document
+            .getElementById("detailsPage")
+            .style.display = "none";
+
+
+        document
+            .getElementById("loginPage")
+            .style.display = "flex";
+
+
+        document
+            .getElementById("loginMessage")
+            .textContent = "";
+
+
+    }
+
+
+
+    // =================================================
+    // SHOW DASHBOARD
+    // =================================================
+
+    function showDashboard(username) {
+
+
+        document
+            .getElementById("loginPage")
+            .style.display = "none";
+
+
+        document
+            .getElementById("registerPage")
+            .style.display = "none";
+
+
+        document
+            .getElementById("detailsPage")
+            .style.display = "none";
+
+
+        document
+            .getElementById("dashboardPage")
+            .style.display = "block";
+
+
+        document
+            .getElementById("welcomeUsername")
+            .textContent = username;
+
+
+        document
+            .getElementById("navbarUsername")
+            .textContent = username;
+
+
+    }
+
+
+
+    // =================================================
+    // TECHNOLOGY DATA
+    // =================================================
+
+    const technologies = {
+
+
+        docker: {
+
+            icon: "🐳",
+
+            title: "Docker",
+
+            description:
+                "Docker is a containerization platform that packages applications and their dependencies into lightweight containers.",
+
+            what:
+                "Docker allows developers to package an application together with everything required to run it.",
+
+            why:
+                "It provides consistency between development, testing and production environments.",
+
+            usage:
+                "In DevOps, Docker is commonly used for application containers, CI/CD pipelines, microservices and deployment automation."
+
+        },
+
+
+        jenkins: {
+
+            icon: "🔨",
+
+            title: "Jenkins",
+
+            description:
+                "Jenkins is an automation server commonly used to implement Continuous Integration and Continuous Delivery.",
+
+            what:
+                "Jenkins automatically performs tasks such as building applications, running tests and deploying software.",
+
+            why:
+                "It reduces manual work and allows teams to continuously integrate and deliver code.",
+
+            usage:
+                "Jenkins can connect Git repositories with automated build, test, Docker and deployment pipelines."
+
+        },
+
+
+        git: {
+
+            icon: "🔀",
+
+            title: "Git",
+
+            description:
+                "Git is a distributed version control system used to track source-code changes.",
+
+            what:
+                "Git records changes made to files and allows developers to work on different branches.",
+
+            why:
+                "It provides version history, collaboration and safe development workflows.",
+
+            usage:
+                "Git is the foundation of many DevOps pipelines and integrates with Jenkins, Azure DevOps and GitHub."
+
+        },
+
+
+        cicd: {
+
+            icon: "🔄",
+
+            title: "CI/CD",
+
+            description:
+                "CI/CD automates the process of building, testing and deploying applications.",
+
+            what:
+                "Continuous Integration automatically validates new code. Continuous Delivery or Deployment automates releasing applications.",
+
+            why:
+                "It allows teams to release software faster and with fewer manual errors.",
+
+            usage:
+                "CI/CD pipelines can build Docker images, execute automated tests and deploy applications to cloud environments."
+
+        },
+
+
+        kubernetes: {
+
+            icon: "☸️",
+
+            title: "Kubernetes",
+
+            description:
+                "Kubernetes is a container orchestration platform designed to manage containerized applications.",
+
+            what:
+                "Kubernetes manages containers across multiple machines.",
+
+            why:
+                "It provides scaling, self-healing, service discovery and automated container management.",
+
+            usage:
+                "DevOps teams use Kubernetes to deploy and manage containerized microservices in production."
+
+        },
+
+
+        azure: {
+
+            icon: "☁️",
+
+            title: "Microsoft Azure",
+
+            description:
+                "Microsoft Azure is a cloud computing platform providing compute, storage, networking, databases and DevOps services.",
+
+            what:
+                "Azure provides cloud infrastructure and managed services that allow organizations to run applications without maintaining physical servers.",
+
+            why:
+                "It provides scalable infrastructure, security and many managed cloud services.",
+
+            usage:
+                "Azure can be used for Virtual Machines, Storage Accounts, Azure DevOps, Key Vault, App Services, AKS and many other services."
+
+        },
+
+
+        aws: {
+
+            icon: "🌩️",
+
+            title: "Amazon Web Services",
+
+            description:
+                "AWS is a cloud computing platform offering infrastructure and managed services.",
+
+            what:
+                "AWS provides services such as EC2, S3, VPC, IAM, RDS and many others.",
+
+            why:
+                "Organizations can quickly create scalable cloud infrastructure.",
+
+            usage:
+                "DevOps engineers use AWS for infrastructure, CI/CD, containers, monitoring and application deployment."
+
+        },
+
+
+        linux: {
+
+            icon: "🐧",
+
+            title: "Linux",
+
+            description:
+                "Linux is an open-source operating system widely used for servers and cloud infrastructure.",
+
+            what:
+                "Linux provides the operating system environment used by many cloud servers and containers.",
+
+            why:
+                "It is stable, secure, flexible and heavily used in cloud environments.",
+
+            usage:
+                "DevOps engineers use Linux for servers, shell scripting, Docker, Kubernetes and CI/CD agents."
+
+        },
+
+
+        terraform: {
+
+            icon: "🏗️",
+
+            title: "Terraform",
+
+            description:
+                "Terraform is an Infrastructure as Code tool developed by HashiCorp.",
+
+            what:
+                "Terraform allows infrastructure to be defined using configuration files.",
+
+            why:
+                "Infrastructure can be version controlled, reproduced and automated.",
+
+            usage:
+                "Terraform can create Azure VMs, storage accounts, networking, AWS infrastructure and other cloud resources."
+
+        },
+
+
+        ansible: {
+
+            icon: "⚡",
+
+            title: "Ansible",
+
+            description:
+                "Ansible is an automation and configuration-management tool.",
+
+            what:
+                "Ansible allows engineers to automate server configuration and application deployment.",
+
+            why:
+                "It eliminates repetitive manual server configuration tasks.",
+
+            usage:
+                "DevOps teams use Ansible for server provisioning, software installation, configuration and deployment."
+
+        }
+
+    };
+
+
+
+    // =================================================
+    // SHOW TECHNOLOGY
+    // =================================================
+
+    function showTechnology(technology) {
+
+
+        const data =
+            technologies[technology];
+
+
+        if (!data) {
+
+            return;
+
+        }
+
+
+        document
+            .getElementById("dashboardPage")
+            .style.display = "none";
+
+
+        document
+            .getElementById("detailsPage")
+            .style.display = "block";
+
+
+        document
+            .getElementById("detailsIcon")
+            .textContent = data.icon;
+
+
+        document
+            .getElementById("detailsTitle")
+            .textContent = data.title;
+
+
+        document
+            .getElementById("detailsDescription")
+            .textContent =
+            data.description;
+
+
+        document
+            .getElementById("detailsWhat")
+            .textContent =
+            data.what;
+
+
+        document
+            .getElementById("detailsWhy")
+            .textContent =
+            data.why;
+
+
+        document
+            .getElementById("detailsUsage")
+            .textContent =
+            data.usage;
+
+
+        const username =
+            localStorage.getItem("username");
+
+
+        document
+            .getElementById("detailsUsername")
+            .textContent =
+            `👤 ${username}`;
+
+
+    }
+
+
+
+    // =================================================
+    // BACK TO DASHBOARD
+    // =================================================
+
+    function backToDashboard() {
+
+
+        const username =
+            localStorage.getItem("username");
+
+
+        showDashboard(username);
+
+
+    }
+
+
+
+    // =================================================
+    // LOGOUT
+    // =================================================
+
+    function logout() {
+
+
+        localStorage.removeItem("username");
+
+
+        document
+            .getElementById("dashboardPage")
+            .style.display = "none";
+
+
+        document
+            .getElementById("detailsPage")
+            .style.display = "none";
+
+
+        document
+            .getElementById("registerPage")
+            .style.display = "none";
+
+
+        document
+            .getElementById("loginPage")
+            .style.display = "flex";
+
+
+        document
+            .getElementById("username")
+            .value = "";
+
+
+        document
+            .getElementById("password")
+            .value = "";
+
+
+    }
+
+
+
+    // =================================================
+    // CHECK EXISTING LOGIN
+    // =================================================
+
+    window.addEventListener(
+        "load",
+        function() {
+
+
+            const username =
+                localStorage.getItem(
+                    "username"
+                );
+
+
+            if (username) {
+
+                showDashboard(username);
+
+            }
+
+
+        }
+    );
+
+
+</script>
+
+
+</body>
+
+</html>
